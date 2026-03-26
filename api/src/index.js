@@ -32,6 +32,7 @@ app.use(cors({
   origin: [
     process.env.FRONTEND_URL || 'http://localhost:5173',
     'https://golf-charity-platform-ebon.vercel.app',
+    'https://golf-charity-platform-ceao469ly-twriadarshs-projects.vercel.app',
     'http://localhost:5173'
   ],
   credentials: true
