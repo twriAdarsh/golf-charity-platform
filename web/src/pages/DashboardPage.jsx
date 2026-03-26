@@ -99,37 +99,37 @@ export default function DashboardPage() {
           <nav className="sidebar-nav">
             <button 
               className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
-              onClick={() => setActiveTab('home')}
+              onClick={() => { setActiveTab('home'); setSidebarOpen(false); }}
             >
               🏠 Home
             </button>
             <button 
               className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
-              onClick={() => setActiveTab('profile')}
+              onClick={() => { setActiveTab('profile'); setSidebarOpen(false); }}
             >
               👤 Profile
             </button>
             <button 
               className={`nav-item ${activeTab === 'subscription' ? 'active' : ''}`}
-              onClick={() => setActiveTab('subscription')}
+              onClick={() => { setActiveTab('subscription'); setSidebarOpen(false); }}
             >
               💳 Subscription
             </button>
             <button 
               className={`nav-item ${activeTab === 'charities' ? 'active' : ''}`}
-              onClick={() => setActiveTab('charities')}
+              onClick={() => { setActiveTab('charities'); setSidebarOpen(false); }}
             >
               🏛️ View Charities
             </button>
             <button 
               className={`nav-item ${activeTab === 'draws' ? 'active' : ''}`}
-              onClick={() => setActiveTab('draws')}
+              onClick={() => { setActiveTab('draws'); setSidebarOpen(false); }}
             >
               🎯 Monthly Draws
             </button>
             <button 
               className={`nav-item ${activeTab === 'scores' ? 'active' : ''}`}
-              onClick={() => setActiveTab('scores')}
+              onClick={() => { setActiveTab('scores'); setSidebarOpen(false); }}
             >
               📊 Recent Scores
             </button>
