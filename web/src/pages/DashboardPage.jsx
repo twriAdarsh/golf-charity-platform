@@ -100,10 +100,10 @@ export default function DashboardPage() {
             </section>
 
             <section className="dashboard-card">
-              <h2>🔧 Administration</h2>
-              <p>Manage platform, users, draws, and winners</p>
-              <button className="btn-primary" onClick={() => navigate('/admin')}>
-                Admin Dashboard →
+              <h2>View Charities</h2>
+              <p>Browse all supported charities and select one</p>
+              <button className="btn-primary" onClick={() => navigate('/subscribe')}>
+                View All Charities →
               </button>
             </section>
 
