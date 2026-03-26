@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import '../styles/pages/Dashboard.css'
+import Loading from '../components/Loading'
+import '../styles/pages/AdminPage.css'
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState('analytics')
@@ -141,33 +142,33 @@ export default function AdminPage() {
     }
   }
 
-  if (loading) return <div className="dashboard">Loading admin dashboard...</div>
+  if (loading) return <Loading fullscreen={true} text="Loading admin dashboard..." />
 
   return (
-    <div className="dashboard">
-      <header className="dashboard-header">
+    <div className="admin-dashboard">
+      <header className="admin-header">
         <div className="container">
           <h1>🔧 Admin Dashboard</h1>
           <button onClick={() => navigate('/dashboard')} className="btn-logout">Back to Dashboard</button>
         </div>
       </header>
 
-      <div className="container">
+      <div className="admin-container">
         {/* Tab Navigation */}
-        <div className="tabs">
-          <button className={`tab ${activeTab === 'analytics' ? 'active' : ''}`} onClick={() => setActiveTab('analytics')}>
+        <div className="admin-tabs">
+          <button className={`admin-tab ${activeTab === 'analytics' ? 'active' : ''}`} onClick={() => setActiveTab('analytics')}>
             📊 Analytics
           </button>
-          <button className={`tab ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>
+          <button className={`admin-tab ${activeTab === 'users' ? 'active' : ''}`} onClick={() => setActiveTab('users')}>
             👥 Users
           </button>
-          <button className={`tab ${activeTab === 'draws' ? 'active' : ''}`} onClick={() => setActiveTab('draws')}>
+          <button className={`admin-tab ${activeTab === 'draws' ? 'active' : ''}`} onClick={() => setActiveTab('draws')}>
             🎰 Draws
           </button>
-          <button className={`tab ${activeTab === 'winners' ? 'active' : ''}`} onClick={() => setActiveTab('winners')}>
+          <button className={`admin-tab ${activeTab === 'winners' ? 'active' : ''}`} onClick={() => setActiveTab('winners')}>
             🏆 Winners
           </button>
-          <button className={`tab ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')}>
+          <button className={`admin-tab ${activeTab === 'settings' ? 'active' : ''}`} onClick={() => setActiveTab('settings')}>
             ⚙️ Settings
           </button>
         </div>
@@ -175,7 +176,7 @@ export default function AdminPage() {
         {/* Analytics Tab */}
         {activeTab === 'analytics' && (
           <>
-            <section className="dashboard-card">
+            <section className="admin-card">
               <h2>📈 Key Metrics</h2>
               <div className="metrics-grid">
                 <div className="metric-card">
@@ -453,7 +454,7 @@ export default function AdminPage() {
                 </div>
               </section>
             ) : (
-              <section className="dashboard-card">
+            <section className="admin-card">
                 <h2>🏆 Verify Winners</h2>
                 {winners.length > 0 ? (
                   <div className="winners-verification">

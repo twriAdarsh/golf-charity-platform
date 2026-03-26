@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Loading from '../components/Loading'
 import '../styles/pages/Dashboard.css'
 
 export default function DashboardPage() {
@@ -50,7 +51,7 @@ export default function DashboardPage() {
     navigate('/')
   }
 
-  if (loading) return <div className="dashboard">Loading...</div>
+  if (loading) return <Loading fullscreen={true} text="Loading your dashboard..." />
 
   return (
     <div className="dashboard">

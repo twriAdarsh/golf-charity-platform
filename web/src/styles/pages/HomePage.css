@@ -1,6 +1,14 @@
+.home-page .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Navbar */
 .home-page .navbar {
-  background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.1);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -10,75 +18,209 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 1.25rem 2rem;
 }
 
 .home-page .logo {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #2563eb;
+  font-weight: 700;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .home-page nav {
   display: flex;
-  gap: 20px;
+  gap: 2rem;
   align-items: center;
 }
 
 .home-page nav a {
   text-decoration: none;
-  color: #333;
+  color: #2c3e50;
   font-weight: 600;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.home-page nav a:hover {
-  color: #2563eb;
+.home-page nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
 }
 
+.home-page nav a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
 .home-page .hero {
-  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
   padding: 100px 20px;
   text-align: center;
+  color: white;
+}
+
+.home-page .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.home-page .hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .home-page .hero h2 {
   font-size: 3.5rem;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.home-page .hero p {
-  font-size: 1.25rem;
-  opacity: 0.9;
-  margin-bottom: 40px;
+.home-page .hero-subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 0.8s ease-out 0.1s backwards;
 }
 
-.home-page .how-it-works {
-  padding: 80px 20px;
-  background-color: white;
+.home-page .hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
 }
 
-.home-page .how-it-works h3 {
+/* Benefits Section - 3 Main Cards */
+.home-page .benefits {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.home-page .benefits h2 {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 60px;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.home-page .benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.home-page .benefit-card {
+  background: white;
+  border: 2px solid rgba(102, 126, 234, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.home-page .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+.home-page .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+.home-page .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+
+.home-page .benefit-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+  transform: translateY(-8px);
+}
+
+.home-page .benefit-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.home-page .benefit-card h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.home-page .benefit-description {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.home-page .benefit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.home-page .benefit-list li {
+  color: #64748b;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+/* How It Works Section */
+.home-page .how-it-works {
+  padding: 5rem 2rem;
+  background: white;
+}
+
+.home-page .how-it-works h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  font-weight: 700;
 }
 
 .home-page .steps {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .home-page .step {
   text-align: center;
+  padding: 2rem;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
+.home-page .step:nth-child(1) { animation-delay: 0.1s; }
+.home-page .step:nth-child(2) { animation-delay: 0.2s; }
+.home-page .step:nth-child(3) { animation-delay: 0.3s; }
+.home-page .step:nth-child(4) { animation-delay: 0.4s; }
+
 .home-page .step-number {
-  width: 50px;
-  height: 50px;
-  background-color: #2563eb;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -86,13 +228,339 @@
   justify-content: center;
   font-weight: bold;
   font-size: 1.5rem;
-  margin: 0 auto 20px;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
 }
 
-.home-page footer {
-  background-color: #1f2937;
-  color: white;
+.home-page .step h4 {
+  font-size: 1.25rem;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.home-page .step p {
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* Pricing Section */
+.home-page .pricing {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.home-page .pricing h2 {
   text-align: center;
-  padding: 20px;
-  margin-top: 80px;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.home-page .pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.home-page .pricing-card {
+  background: white;
+  border: 2px solid rgba(102, 126, 234, 0.1);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.home-page .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+.home-page .pricing-card:nth-child(2) { animation-delay: 0.2s; }
+
+.home-page .pricing-card:hover {
+  border-color: #667eea;
+  box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+  transform: translateY(-8px);
+}
+
+.home-page .pricing-card.featured {
+  border-color: #667eea;
+  box-shadow: 0 20px 50px rgba(102, 126, 234, 0.2);
+  transform: scale(1.05);
+}
+
+.home-page .featured-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.home-page .pricing-card h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.home-page .price {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+}
+
+.home-page .price span {
+  font-size: 0.5em;
+  color: #64748b;
+}
+
+.home-page .pricing-badge {
+  color: #10b981;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.home-page .pricing-card ul {
+  list-style: none;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.home-page .pricing-card li {
+  color: #64748b;
+  padding: 0.75rem 0;
+  font-size: 0.95rem;
+}
+
+.home-page .pricing-card .btn-primary {
+  width: 100%;
+}
+
+/* CTA Final Section */
+.home-page .cta-final {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  color: white;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.home-page .cta-final::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.home-page .cta-final .container {
+  position: relative;
+  z-index: 1;
+}
+
+.home-page .cta-final h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.home-page .cta-final p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  margin-bottom: 2rem;
+}
+
+/* Buttons */
+.home-page .btn-primary,
+.home-page .btn-large,
+.home-page .btn-secondary {
+  padding: 0.85rem 2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.home-page .btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.home-page .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+.home-page .btn-large {
+  padding: 1rem 2.5rem;
+  font-size: 1.05rem;
+}
+
+.home-page .btn-secondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.home-page .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.home-page footer {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: #cbd5e1;
+  text-align: center;
+  padding: 2.5rem;
+  margin-top: 5rem;
+  font-size: 0.9rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .home-page .hero h2 {
+    font-size: 2.5rem;
+  }
+
+  .home-page .hero-cta {
+    flex-direction: column;
+  }
+
+  .home-page .pricing-card.featured {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .home-page .navbar .container {
+    padding: 1rem;
+  }
+
+  .home-page nav {
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .home-page .hero {
+    padding: 60px 20px;
+  }
+
+  .home-page .hero h2 {
+    font-size: 2rem;
+  }
+
+  .home-page .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .home-page .benefits,
+  .home-page .how-it-works,
+  .home-page .pricing,
+  .home-page .cta-final {
+    padding: 3rem 1.5rem;
+  }
+
+  .home-page .benefits h2,
+  .home-page .how-it-works h2,
+  .home-page .pricing h2,
+  .home-page .cta-final h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .home-page .benefits-grid,
+  .home-page .steps,
+  .home-page .pricing-grid {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page .logo {
+    font-size: 1.2rem;
+  }
+
+  .home-page nav {
+    gap: 0.5rem;
+  }
+
+  .home-page nav a {
+    display: none;
+  }
+
+  .home-page nav a.btn-primary {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .home-page .hero h2 {
+    font-size: 1.5rem;
+  }
+
+  .home-page .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .home-page .hero-cta {
+    flex-direction: column;
+  }
+
+  .home-page .btn-primary,
+  .home-page .btn-large,
+  .home-page .btn-secondary {
+    width: 100%;
+  }
+
+  .home-page .benefit-card,
+  .home-page .step,
+  .home-page .pricing-card {
+    padding: 1.5rem;
+  }
+
+  .home-page .step-number {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
 }
