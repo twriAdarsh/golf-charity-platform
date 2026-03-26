@@ -1,6 +1,6 @@
 import express from 'express';
 import { adminOnly } from '../middleware/auth.js';
-import { supabase } from '../index.js';
+import { supabase, upload } from '../index.js';
 import { sendEmail } from '../utils/emailService.js';
 
 const router = express.Router();
@@ -195,6 +195,56 @@ router.delete('/draws/:id', adminOnly, async (req, res) => {
 
     if (deleteError) throw deleteError;
     res.json({ message: 'Draw deleted' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Admin: Upload proof image for winner verification
+router.post('/winners/:id/upload-proof', adminOnly, upload.single('proofImage'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const winnerId = req.params.id;
+    const fileName = `proof-${winnerId}-${Date.now()}.${req.file.mimetype.split('/')[1]}`;
+
+    // Upload file to Supabase storage
+    const { data, error: uploadError } = await supabase
+      .storage
+      .from('winner-proofs')
+      .upload(fileName, req.file.buffer, {
+        contentType: req.file.mimetype,
+        cacheControl: '3600',
+        upsert: false
+      });
+
+    if (uploadError) throw uploadError;
+
+    // Get public URL
+    const { data: publicUrlData } = supabase
+      .storage
+      .from('winner-proofs')
+      .getPublicUrl(fileName);
+
+    const proofImageUrl = publicUrlData?.publicUrl;
+
+    // Update winner record with proof image URL
+    const { data: updated, error: updateError } = await supabase
+      .from('winners')
+      .update({ proof_image_url: proofImageUrl })
+      .eq('id', winnerId)
+      .select()
+      .single();
+
+    if (updateError) throw updateError;
+
+    res.json({
+      message: 'Proof image uploaded successfully',
+      proof_image_url: proofImageUrl,
+      winner: updated
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

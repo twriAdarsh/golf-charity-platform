@@ -109,6 +109,38 @@ export default function AdminPage() {
     }
   }
 
+  const handleProofImageUpload = async (winnerId, event) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    const token = localStorage.getItem('token')
+    const formData = new FormData()
+    formData.append('proofImage', file)
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/admin/winners/${winnerId}/upload-proof`,
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      )
+      // Update the selected winner with new proof URL
+      setSelectedWinner({
+        ...selectedWinner,
+        proof_image_url: response.data.proof_image_url
+      })
+      // Reset file input
+      event.target.value = ''
+    } catch (error) {
+      console.error('Error uploading proof image:', error)
+      alert('Failed to upload proof image: ' + error.response?.data?.error || error.message)
+    }
+  }
+
   if (loading) return <div className="dashboard">Loading admin dashboard...</div>
 
   return (
@@ -315,6 +347,71 @@ export default function AdminPage() {
                     <p><strong>Matched Numbers:</strong> {selectedWinner.matched_numbers}</p>
                     <p><strong>Prize Amount:</strong> ${(selectedWinner.prize_amount_cents / 100).toFixed(2)}</p>
                     <p><strong>Status:</strong> {selectedWinner.verification_status}</p>
+                  </div>
+
+                  {/* Proof Image Section */}
+                  <div className="proof-section" style={{
+                    marginTop: '20px',
+                    padding: '15px',
+                    backgroundColor: '#f8f9fa',
+                    borderRadius: '8px',
+                    border: '2px solid #e5e7eb'
+                  }}>
+                    <h4>🖼️ Proof Image</h4>
+                    {selectedWinner.proof_image_url ? (
+                      <div>
+                        <img 
+                          src={selectedWinner.proof_image_url} 
+                          alt="Winner proof" 
+                          style={{
+                            maxWidth: '100%',
+                            maxHeight: '300px',
+                            borderRadius: '8px',
+                            marginBottom: '10px'
+                          }}
+                        />
+                        {selectedWinner.verification_status === 'pending' && (
+                          <div style={{ marginTop: '10px' }}>
+                            <label htmlFor="proofImageUpload" className="btn-small" style={{ display: 'inline-block', cursor: 'pointer' }}>
+                              📤 Update Proof
+                            </label>
+                            <input 
+                              id="proofImageUpload"
+                              type="file" 
+                              accept="image/*"
+                              onChange={(e) => handleProofImageUpload(selectedWinner.id, e)}
+                              style={{ display: 'none' }}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div style={{
+                        padding: '20px',
+                        border: '2px dashed #667eea',
+                        borderRadius: '8px',
+                        textAlign: 'center',
+                        backgroundColor: '#fff'
+                      }}>
+                        {selectedWinner.verification_status === 'pending' ? (
+                          <>
+                            <p style={{ marginBottom: '10px', color: '#666' }}>No proof image uploaded yet</p>
+                            <label htmlFor="proofImageUpload" className="btn-small" style={{ display: 'inline-block', cursor: 'pointer' }}>
+                              📤 Upload Proof Image
+                            </label>
+                            <input 
+                              id="proofImageUpload"
+                              type="file" 
+                              accept="image/*"
+                              onChange={(e) => handleProofImageUpload(selectedWinner.id, e)}
+                              style={{ display: 'none' }}
+                            />
+                          </>
+                        ) : (
+                          <p style={{ color: '#999' }}>No proof image available for this claim</p>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {selectedWinner.verification_status === 'pending' && (
