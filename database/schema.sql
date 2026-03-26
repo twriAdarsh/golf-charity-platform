@@ -9,6 +9,8 @@ CREATE TABLE users (
   profile_image_url TEXT,
   phone VARCHAR(20),
   country VARCHAR(2),
+  password_reset_token VARCHAR(255),
+  password_reset_expiry TIMESTAMP,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   is_active BOOLEAN DEFAULT true

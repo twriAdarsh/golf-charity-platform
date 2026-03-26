@@ -127,6 +127,24 @@ const emailTemplates = {
     `
   }),
 
+  passwordResetConfirm: (user) => ({
+    subject: '✅ Your Password Has Been Reset',
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #10b981;">Password Changed Successfully</h2>
+        <p>Hi ${user.fullName || user.email},</p>
+        <p>Your password has been successfully reset. You can now login with your new password.</p>
+        <p>
+          <a href="${FRONTEND_URL}/login" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+            Login to Your Account →
+          </a>
+        </p>
+        <p>If you didn't make this change or have concerns, please contact support immediately.</p>
+        <p style="color: #999; font-size: 12px;">© 2024 Golf Charity Platform. All rights reserved.</p>
+      </div>
+    `
+  }),
+
   subscriptionCanceled: (user) => ({
     subject: 'Your Subscription Has Been Canceled',
     html: `

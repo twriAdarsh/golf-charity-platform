@@ -65,6 +65,9 @@ export default function LoginPage({ onLogin }) {
               required
               placeholder="Your password"
             />
+            <a href="/forgot-password" style={{ fontSize: '0.85rem', marginTop: '5px', display: 'block' }}>
+              Forgot password?
+            </a>
           </div>
 
           <button type="submit" disabled={loading} className="btn-primary">
