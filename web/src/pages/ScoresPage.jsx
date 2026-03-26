@@ -99,10 +99,6 @@ export default function ScoresPage() {
     localStorage.removeItem('userType')
     navigate('/login/user')
   }
-    } finally {
-      setSubmitting(false)
-    }
-  }
 
   if (loading) return <div className="dashboard">Loading scores...</div>
 
