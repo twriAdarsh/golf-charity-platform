@@ -7,7 +7,6 @@
     "VITE_API_URL": "https://golf-charity-platform-production-5eca.up.railway.app/api"
   },
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://golf-charity-platform-production-5eca.up.railway.app/api/:path*" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
