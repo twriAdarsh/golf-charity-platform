@@ -1,0 +1,9 @@
+{
+  "buildCommand": "cd web && npm install && npm run build",
+  "outputDirectory": "web/dist",
+  "devCommand": "cd web && npm run dev",
+  "framework": "vite",
+  "env": {
+    "VITE_API_URL": "https://golf-charity-platform-production-5eca.up.railway.app/api"
+  }
+}
