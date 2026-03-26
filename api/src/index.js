@@ -28,15 +28,25 @@ export const supabase = createClient(
 app.use('/api/stripe', stripeWebhookRoutes);
 
 // Middleware
-app.use(cors({
-  origin: [
-    process.env.FRONTEND_URL || 'http://localhost:5173',
-    'https://golf-charity-platform-ebon.vercel.app',
-    'https://golf-charity-platform-ceao469ly-twriadarshs-projects.vercel.app',
-    'http://localhost:5173'
-  ],
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3001',
+  process.env.FRONTEND_URL
+];
+
+// Allow any vercel.app domain and any localhost variant
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || origin.includes('vercel.app') || origin.includes('localhost')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
-}));
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
