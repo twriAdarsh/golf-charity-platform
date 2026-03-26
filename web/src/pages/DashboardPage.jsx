@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading'
@@ -11,12 +11,8 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('home')
   const navigate = useNavigate()
-  const mounted = useRef(false)
 
   useEffect(() => {
-    if (mounted.current) return
-    mounted.current = true
-
     const token = localStorage.getItem('token')
     const userType = localStorage.getItem('userType')
     const userStr = localStorage.getItem('user')
@@ -33,36 +29,34 @@ export default function DashboardPage() {
       return
     }
 
-    // Load dashboard data
-    setUser(JSON.parse(userStr))
-    fetchDashboardData(token)
+    fetchDashboardData()
   }, [navigate])
 
-  const fetchDashboardData = async (token) => {
+  const fetchDashboardData = async () => {
     try {
-      // Fetch scores - handle errors gracefully
-      try {
-        const scoresResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/scores`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        setScores(scoresResponse.data || [])
-      } catch (err) {
-        console.error('Error fetching scores:', err)
-        setScores([])
+      const token = localStorage.getItem('token')
+      const userStr = localStorage.getItem('user')
+      
+      if (!token) {
+        navigate('/login')
+        return
       }
 
-      // Fetch subscriptions - handle errors gracefully
-      try {
-        const subResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/subscriptions`, {
-          headers: { 'Authorization': `Bearer ${token}` }
-        })
-        setSubscriptions(subResponse.data || [])
-      } catch (err) {
-        console.error('Error fetching subscriptions:', err)
-        setSubscriptions([])
-      }
+      setUser(JSON.parse(userStr))
+
+      // Fetch scores
+      const scoresResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/scores`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      setScores(scoresResponse.data)
+
+      // Fetch subscriptions
+      const subResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/subscriptions`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      setSubscriptions(subResponse.data)
     } catch (error) {
-      console.error('Dashboard error:', error)
+      console.error(error)
     } finally {
       setLoading(false)
     }
@@ -72,7 +66,7 @@ export default function DashboardPage() {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     localStorage.removeItem('userType')
-    navigate('/login/user')
+    navigate('/login')
   }
 
   if (loading) return <Loading fullscreen={true} text="Loading your dashboard..." />
