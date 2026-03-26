@@ -9,6 +9,7 @@ CREATE TABLE users (
   profile_image_url TEXT,
   phone VARCHAR(20),
   country VARCHAR(2),
+  role VARCHAR(20) DEFAULT 'user', -- 'user' or 'admin'
   password_reset_token VARCHAR(255),
   password_reset_expiry TIMESTAMP,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

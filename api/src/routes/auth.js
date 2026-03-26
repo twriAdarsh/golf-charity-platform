@@ -57,7 +57,7 @@ router.post('/register', async (req, res) => {
     );
 
     res.status(201).json({
-      user: { id: newUser.id, email: newUser.email, fullName: newUser.full_name },
+      user: { id: newUser.id, email: newUser.email, fullName: newUser.full_name, role: newUser.role || 'user' },
       token
     });
   } catch (error) {
@@ -96,7 +96,7 @@ router.post('/login', async (req, res) => {
     );
 
     res.json({
-      user: { id: user.id, email: user.email, fullName: user.full_name },
+      user: { id: user.id, email: user.email, fullName: user.full_name, role: user.role || 'user' },
       token
     });
   } catch (error) {
