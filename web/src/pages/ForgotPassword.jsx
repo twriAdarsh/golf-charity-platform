@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import './Auth.css'
+import '../styles/pages/Auth.css'
 
 export default function ForgotPassword() {
   const navigate = useNavigate()
