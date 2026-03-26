@@ -10,6 +10,7 @@ export default function DashboardPage() {
   const [subscriptions, setSubscriptions] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('home')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -75,14 +76,23 @@ export default function DashboardPage() {
     <div className="dashboard-sidebar-layout">
       <header className="dashboard-header">
         <div className="container">
-          <h1>🏌️ Golf Charity Dashboard</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: 1 }}>
+            <button 
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="hamburger-menu"
+              title="Toggle Menu"
+            >
+              ☰
+            </button>
+            <h1>🏌️ Golf Charity Dashboard</h1>
+          </div>
           <button onClick={handleLogout} className="btn-logout">Logout</button>
         </div>
       </header>
 
       <div className="dashboard-container">
         {/* SIDEBAR */}
-        <aside className="dashboard-sidebar">
+        <aside className={`dashboard-sidebar ${sidebarOpen ? 'open' : ''}`}>
           <div className="sidebar-brand">
             <h3>Player Menu</h3>
           </div>
@@ -125,6 +135,14 @@ export default function DashboardPage() {
             </button>
           </nav>
         </aside>
+
+        {/* OVERLAY - closes sidebar when clicked */}
+        {sidebarOpen && (
+          <div 
+            className="sidebar-overlay" 
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
 
         {/* MAIN CONTENT */}
         <main className="dashboard-main">

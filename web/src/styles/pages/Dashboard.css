@@ -41,6 +41,29 @@
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  margin: 0;
+}
+
+/* HAMBURGER MENU */
+.hamburger-menu {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.hamburger-menu:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
 }
 
 .dashboard .container {
@@ -365,13 +388,33 @@
 /* SIDEBAR */
 .dashboard-sidebar {
   width: 280px;
-  background: linear-gradient(135deg, rgba(20, 30, 60, 0.95) 0%, rgba(30, 40, 80, 0.95) 100%);
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   backdrop-filter: blur(10px);
   padding: 2rem 0;
-  border-right: 1px solid rgba(102, 126, 234, 0.2);
-  position: relative;
+  border-right: 1px solid rgba(102, 126, 234, 0.3);
+  position: absolute;
+  left: -280px;
+  top: 80px;
+  height: calc(100vh - 80px);
   overflow-y: auto;
   flex-shrink: 0;
+  transition: left 0.3s ease;
+  z-index: 100;
+}
+
+.dashboard-sidebar.open {
+  left: 0;
+}
+
+/* SIDEBAR OVERLAY */
+.sidebar-overlay {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
 }
 
 .sidebar-brand {
@@ -424,6 +467,11 @@
 /* MAIN CONTENT */
 .dashboard-main {
   flex: 1;
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
   padding: 3rem 2rem;
   max-width: 1200px;
   width: 100%;
