@@ -335,4 +335,66 @@ router.post('/winners/:id/reject', adminOnly, async (req, res) => {
   }
 });
 
+// Admin: Get all admins
+router.get('/admins', adminOnly, async (req, res) => {
+  try {
+    const { data: admins, error } = await supabase
+      .from('users')
+      .select('*')
+      .eq('role', 'admin')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    res.json(admins);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Admin: Promote user to admin
+router.post('/promote-user/:userId', adminOnly, async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const { data: updated, error } = await supabase
+      .from('users')
+      .update({ role: 'admin' })
+      .eq('id', userId)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    res.json({
+      message: 'User promoted to admin',
+      user: updated
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Admin: Demote admin to user
+router.post('/demote-user/:userId', adminOnly, async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const { data: updated, error } = await supabase
+      .from('users')
+      .update({ role: 'user' })
+      .eq('id', userId)
+      .select()
+      .single();
+
+    if (error) throw error;
+
+    res.json({
+      message: 'Admin demoted to user',
+      user: updated
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 export default router;
