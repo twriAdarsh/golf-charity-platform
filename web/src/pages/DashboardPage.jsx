@@ -108,14 +108,6 @@ export default function DashboardPage() {
             </section>
 
             <section className="dashboard-card">
-              <h2>View Charities</h2>
-              <p>Browse all supported charities and select one</p>
-              <button className="btn-primary" onClick={() => navigate('/subscribe')}>
-                View All Charities →
-              </button>
-            </section>
-
-            <section className="dashboard-card">
               <h2>Monthly Draws</h2>
               <p>Check your draw status and see if you won!</p>
               <button className="btn-primary" onClick={() => navigate('/draws')}>
