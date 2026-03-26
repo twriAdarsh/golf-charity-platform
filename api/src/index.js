@@ -4,16 +4,6 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import { createClient } from '@supabase/supabase-js';
 
-// Routes
-import authRoutes from './routes/auth.js';
-import subscriptionRoutes from './routes/subscriptions.js';
-import scoresRoutes from './routes/scores.js';
-import drawRoutes from './routes/draws.js';
-import charitiesRoutes from './routes/charities.js';
-import winnersRoutes from './routes/winners.js';
-import adminRoutes from './routes/admin.js';
-import stripeWebhookRoutes from './utils/stripeWebhook.js';
-
 dotenv.config();
 
 const app = express();
@@ -24,6 +14,29 @@ export const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
+
+// Multer configuration for file uploads (MUST be before route imports)
+export const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed'));
+    }
+  }
+});
+
+// Routes
+import authRoutes from './routes/auth.js';
+import subscriptionRoutes from './routes/subscriptions.js';
+import scoresRoutes from './routes/scores.js';
+import drawRoutes from './routes/draws.js';
+import charitiesRoutes from './routes/charities.js';
+import winnersRoutes from './routes/winners.js';
+import adminRoutes from './routes/admin.js';
+import stripeWebhookRoutes from './utils/stripeWebhook.js';
 
 // Stripe webhook (must be before express.json() for raw body)
 app.use('/api/stripe', stripeWebhookRoutes);
@@ -51,21 +64,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-// Multer configuration for file uploads
-const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) {
-      cb(null, true);
-    } else {
-      cb(new Error('Only image files are allowed'));
-    }
-  }
-});
-
-export { upload };
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

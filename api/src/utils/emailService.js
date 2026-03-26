@@ -3,7 +3,12 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+// Only set API key if it starts with "SG." (valid SendGrid key)
+if (process.env.SENDGRID_API_KEY && process.env.SENDGRID_API_KEY.startsWith('SG.')) {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+} else {
+  console.warn('⚠️  SendGrid API key not configured. Email features will be disabled in development.')
+}
 
 const SENDER_EMAIL = process.env.SENDER_EMAIL || 'noreply@golfcharity.app'
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
