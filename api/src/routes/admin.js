@@ -1,6 +1,7 @@
 import express from 'express';
 import { adminOnly } from '../middleware/auth.js';
-import { supabase, upload } from '../index.js';
+import { upload } from '../middleware/multer.js';
+import { supabase } from '../index.js';
 import { sendEmail } from '../utils/emailService.js';
 
 const router = express.Router();
