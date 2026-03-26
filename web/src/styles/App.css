@@ -9,82 +9,118 @@
 .app {
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/* Navigation */
+/* Navigation - Modern & Clean */
 nav {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1.2rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(102, 126, 234, 0.2);
 }
 
 nav a, nav button {
-  color: white;
+  color: #2c3e50;
   text-decoration: none;
-  margin: 0 1rem;
+  margin: 0 1.2rem;
   cursor: pointer;
   border: none;
   background: none;
-  font-size: 1rem;
-  transition: color 0.3s;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 nav a:hover, nav button:hover {
   color: #667eea;
 }
 
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
 /* Main Content */
 main {
-  padding: 2rem;
+  flex: 1;
+  padding: 2.5rem 2rem;
+  overflow-y: auto;
 }
 
 /* Footer */
 footer {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
   color: white;
   text-align: center;
   padding: 2rem;
   margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
   nav {
-    padding: 0.75rem 1rem !important;
+    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   nav a, nav button {
-    margin: 0 0.5rem !important;
-    font-size: 0.9rem !important;
+    margin: 0 0.5rem;
+    font-size: 0.85rem;
   }
 
   main {
-    padding: 1rem !important;
+    padding: 1.5rem 1rem;
   }
 
   footer {
-    padding: 1rem;
+    padding: 1.5rem 1rem;
   }
 }
 
 @media (max-width: 480px) {
   nav {
-    padding: 0.5rem !important;
+    padding: 0.75rem;
     flex-direction: column;
     align-items: flex-start;
+    gap: 10px;
   }
 
   nav a, nav button {
-    margin: 0.5rem 0 !important;
+    margin: 0;
     display: block;
     width: 100%;
+    padding: 8px 0;
+    font-size: 0.85rem;
   }
 
   main {
-    padding: 0.5rem !important;
+    padding: 1rem 0.75rem;
+  }
+
+  footer {
+    padding: 1rem 0.75rem;
+    font-size: 0.8rem;
   }
 }
