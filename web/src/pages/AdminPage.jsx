@@ -43,7 +43,7 @@ export default function AdminPage() {
     try {
       const token = localStorage.getItem('token')
       if (!token) {
-        navigate('/login')
+        navigate('/login/admin')
         return
       }
 

@@ -38,7 +38,7 @@ export default function DrawsPage() {
     try {
       const token = localStorage.getItem('token')
       if (!token) {
-        navigate('/login')
+        navigate('/login/user')
         return
       }
 

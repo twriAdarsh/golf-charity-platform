@@ -16,19 +16,16 @@ export default function DashboardPage() {
     const userType = localStorage.getItem('userType')
     const userStr = localStorage.getItem('user')
 
-    // If no token or wrong user type, redirect
-    if (!token || userType === 'admin') {
-      navigate('/login')
+    // If no token, redirect to player login
+    if (!token) {
+      navigate('/login/user')
       return
     }
 
     // If user is admin, redirect to admin dashboard
-    if (userStr) {
-      const userData = JSON.parse(userStr)
-      if (userData.role === 'admin') {
-        navigate('/admin')
-        return
-      }
+    if (userType === 'admin' || (userStr && JSON.parse(userStr).role === 'admin')) {
+      navigate('/admin')
+      return
     }
 
     fetchDashboardData()
