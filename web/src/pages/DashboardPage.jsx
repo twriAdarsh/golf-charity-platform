@@ -38,25 +38,35 @@ export default function DashboardPage() {
       const userStr = localStorage.getItem('user')
       
       if (!token) {
-        navigate('/login')
+        navigate('/login/user')
         return
       }
 
       setUser(JSON.parse(userStr))
 
-      // Fetch scores
-      const scoresResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/scores`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      setScores(scoresResponse.data)
+      // Fetch scores - handle errors gracefully
+      try {
+        const scoresResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/scores`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        setScores(scoresResponse.data || [])
+      } catch (err) {
+        console.error('Error fetching scores:', err)
+        setScores([])
+      }
 
-      // Fetch subscriptions
-      const subResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/subscriptions`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      })
-      setSubscriptions(subResponse.data)
+      // Fetch subscriptions - handle errors gracefully
+      try {
+        const subResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/subscriptions`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        })
+        setSubscriptions(subResponse.data || [])
+      } catch (err) {
+        console.error('Error fetching subscriptions:', err)
+        setSubscriptions([])
+      }
     } catch (error) {
-      console.error(error)
+      console.error('Dashboard error:', error)
     } finally {
       setLoading(false)
     }
@@ -66,7 +76,7 @@ export default function DashboardPage() {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     localStorage.removeItem('userType')
-    navigate('/login')
+    navigate('/login/user')
   }
 
   if (loading) return <Loading fullscreen={true} text="Loading your dashboard..." />
