@@ -37,7 +37,7 @@ export default function AdminPage() {
     }
 
     fetchAdminData()
-  }, [navigate])
+  }, [])
 
   const fetchAdminData = async () => {
     try {

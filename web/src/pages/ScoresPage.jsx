@@ -33,7 +33,7 @@ export default function ScoresPage() {
     }
 
     fetchScores()
-  }, [navigate])
+  }, [])
 
   const fetchScores = async () => {
     try {

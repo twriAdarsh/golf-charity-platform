@@ -33,7 +33,7 @@ export default function SubscriptionPage() {
     }
 
     fetchCharities()
-  }, [navigate])
+  }, [])
 
   const fetchCharities = async () => {
     try {

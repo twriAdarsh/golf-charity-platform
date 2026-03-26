@@ -30,7 +30,7 @@ export default function DashboardPage() {
     }
 
     fetchDashboardData()
-  }, [navigate])
+  }, [])
 
   const fetchDashboardData = async () => {
     try {

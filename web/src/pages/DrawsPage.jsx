@@ -32,7 +32,7 @@ export default function DrawsPage() {
     }
 
     fetchDrawsAndScores()
-  }, [navigate])
+  }, [])
 
   const fetchDrawsAndScores = async () => {
     try {
