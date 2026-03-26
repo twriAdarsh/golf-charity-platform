@@ -32,6 +32,7 @@ app.use('/api/stripe', stripeWebhookRoutes);
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3001',
+  'https://golf-charity-platform-572gegxe0-twriadarshs-projects.vercel.app',
   process.env.FRONTEND_URL
 ];
 
@@ -44,7 +45,9 @@ const corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 
 app.use(cors(corsOptions));
