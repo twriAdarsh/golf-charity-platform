@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading'
@@ -11,8 +11,12 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('home')
   const navigate = useNavigate()
+  const mounted = useRef(false)
 
   useEffect(() => {
+    if (mounted.current) return
+    mounted.current = true
+
     const token = localStorage.getItem('token')
     const userType = localStorage.getItem('userType')
     const userStr = localStorage.getItem('user')
@@ -29,21 +33,13 @@ export default function DashboardPage() {
       return
     }
 
-    fetchDashboardData()
-  }, [])
+    // Load dashboard data
+    setUser(JSON.parse(userStr))
+    fetchDashboardData(token)
+  }, [navigate])
 
-  const fetchDashboardData = async () => {
+  const fetchDashboardData = async (token) => {
     try {
-      const token = localStorage.getItem('token')
-      const userStr = localStorage.getItem('user')
-      
-      if (!token) {
-        navigate('/login/user')
-        return
-      }
-
-      setUser(JSON.parse(userStr))
-
       // Fetch scores - handle errors gracefully
       try {
         const scoresResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/scores`, {
