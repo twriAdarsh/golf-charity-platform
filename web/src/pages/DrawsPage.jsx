@@ -12,8 +12,27 @@ export default function DrawsPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    const userType = localStorage.getItem('userType')
+    const userStr = localStorage.getItem('user')
+
+    // If no token or not player, redirect
+    if (!token || userType === 'admin') {
+      navigate('/login/user')
+      return
+    }
+
+    // If user is admin, redirect to admin dashboard
+    if (userStr) {
+      const userData = JSON.parse(userStr)
+      if (userData.role === 'admin') {
+        navigate('/admin')
+        return
+      }
+    }
+
     fetchDrawsAndScores()
-  }, [])
+  }, [navigate])
 
   const fetchDrawsAndScores = async () => {
     try {
@@ -64,6 +83,13 @@ export default function DrawsPage() {
     return draws.find(d => d.status === 'published') || draws[0]
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    localStorage.removeItem('userType')
+    navigate('/login/user')
+  }
+
   const currentDraw = getCurrentDraw()
 
   if (loading) return <div className="dashboard">Loading draws...</div>
@@ -73,7 +99,7 @@ export default function DrawsPage() {
       <header className="dashboard-header">
         <div className="container">
           <h1>🎰 Monthly Draws</h1>
-          <button onClick={() => navigate('/dashboard')} className="btn-logout">Back to Dashboard</button>
+          <button onClick={handleLogout} className="btn-logout">Logout</button>
         </div>
       </header>
 

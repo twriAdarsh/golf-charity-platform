@@ -13,8 +13,27 @@ export default function SubscriptionPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    const userType = localStorage.getItem('userType')
+    const userStr = localStorage.getItem('user')
+
+    // If no token or not player, redirect
+    if (!token || userType === 'admin') {
+      navigate('/login/user')
+      return
+    }
+
+    // If user is admin, redirect to admin dashboard
+    if (userStr) {
+      const userData = JSON.parse(userStr)
+      if (userData.role === 'admin') {
+        navigate('/admin')
+        return
+      }
+    }
+
     fetchCharities()
-  }, [])
+  }, [navigate])
 
   const fetchCharities = async () => {
     try {
@@ -73,6 +92,13 @@ export default function SubscriptionPage() {
     }
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    localStorage.removeItem('userType')
+    navigate('/login/user')
+  }
+
   if (loading) return <div className="dashboard">Loading charities...</div>
 
   return (
@@ -80,7 +106,7 @@ export default function SubscriptionPage() {
       <header className="dashboard-header">
         <div className="container">
           <h1>💳 Choose Your Subscription Plan</h1>
-          <button onClick={() => navigate('/dashboard')} className="btn-logout">Back to Dashboard</button>
+          <button onClick={handleLogout} className="btn-logout">Logout</button>
         </div>
       </header>
 

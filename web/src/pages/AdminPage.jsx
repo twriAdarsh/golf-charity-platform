@@ -17,8 +17,27 @@ export default function AdminPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    const userType = localStorage.getItem('userType')
+    const userStr = localStorage.getItem('user')
+
+    // If no token or not admin, redirect
+    if (!token || userType !== 'admin') {
+      navigate('/login/admin')
+      return
+    }
+
+    // If user is not admin, redirect to player dashboard
+    if (userStr) {
+      const userData = JSON.parse(userStr)
+      if (userData.role !== 'admin') {
+        navigate('/login/user')
+        return
+      }
+    }
+
     fetchAdminData()
-  }, [])
+  }, [navigate])
 
   const fetchAdminData = async () => {
     try {
@@ -110,6 +129,13 @@ export default function AdminPage() {
     }
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    localStorage.removeItem('userType')
+    navigate('/login/admin')
+  }
+
   const handleProofImageUpload = async (winnerId, event) => {
     const file = event.target.files?.[0]
     if (!file) return
@@ -149,7 +175,7 @@ export default function AdminPage() {
       <header className="admin-header">
         <div className="container">
           <h1>🔧 Admin Dashboard</h1>
-          <button onClick={() => navigate('/dashboard')} className="btn-logout">Back to Dashboard</button>
+          <button onClick={handleLogout} className="btn-logout">Logout</button>
         </div>
       </header>
 

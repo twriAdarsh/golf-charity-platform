@@ -88,13 +88,6 @@ export default function AdminLoginPage({ onLogin }) {
         </form>
 
         <div style={{ marginTop: '30px', paddingTop: '30px', borderTop: '1px solid #e5e7eb', textAlign: 'center' }}>
-          <p style={{ color: '#6b7280', marginBottom: '10px' }}>Are you a player?</p>
-          <a href="/login/user" style={{ color: '#667eea', fontWeight: '600', textDecoration: 'none' }}>
-            Go to Player Login →
-          </a>
-        </div>
-
-        <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #e5e7eb', textAlign: 'center' }}>
           <a href="/login" style={{ color: '#6b7280', textDecoration: 'none', fontSize: '0.9rem' }}>
             ← Back to Login Choice
           </a>

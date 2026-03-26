@@ -88,9 +88,8 @@ export default function UserLoginPage({ onLogin }) {
         </p>
 
         <div style={{ marginTop: '30px', paddingTop: '30px', borderTop: '1px solid #e5e7eb', textAlign: 'center' }}>
-          <p style={{ color: '#6b7280', marginBottom: '10px' }}>Admin?</p>
-          <a href="/login/admin" style={{ color: '#667eea', fontWeight: '600', textDecoration: 'none' }}>
-            Go to Admin Login →
+          <a href="/login" style={{ color: '#6b7280', textDecoration: 'none', fontSize: '0.9rem' }}>
+            ← Back to Login Choice
           </a>
         </div>
       </div>

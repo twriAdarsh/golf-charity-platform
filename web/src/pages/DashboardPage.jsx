@@ -12,8 +12,27 @@ export default function DashboardPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    const token = localStorage.getItem('token')
+    const userType = localStorage.getItem('userType')
+    const userStr = localStorage.getItem('user')
+
+    // If no token or wrong user type, redirect
+    if (!token || userType === 'admin') {
+      navigate('/login')
+      return
+    }
+
+    // If user is admin, redirect to admin dashboard
+    if (userStr) {
+      const userData = JSON.parse(userStr)
+      if (userData.role === 'admin') {
+        navigate('/admin')
+        return
+      }
+    }
+
     fetchDashboardData()
-  }, [])
+  }, [navigate])
 
   const fetchDashboardData = async () => {
     try {
@@ -48,7 +67,8 @@ export default function DashboardPage() {
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
-    navigate('/')
+    localStorage.removeItem('userType')
+    navigate('/login')
   }
 
   if (loading) return <Loading fullscreen={true} text="Loading your dashboard..." />
