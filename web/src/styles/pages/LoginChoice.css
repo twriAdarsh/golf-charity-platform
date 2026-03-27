@@ -43,9 +43,10 @@
 
 .subtitle {
   text-align: center;
-  color: #6b7280;
+  color: #1f2937;
   font-size: 1.1rem;
   margin-bottom: 40px;
+  font-weight: 500;
 }
 
 .choice-buttons {

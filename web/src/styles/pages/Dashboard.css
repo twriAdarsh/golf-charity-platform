@@ -442,9 +442,9 @@
   padding: 1rem 1.5rem;
   background: transparent;
   border: none;
-  color: #c7d2fe;
+  color: #ffffff;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   text-align: left;
   cursor: pointer;
   border-radius: 8px;
@@ -454,16 +454,16 @@
 }
 
 .nav-item:hover {
-  background: rgba(102, 126, 234, 0.4);
-  color: #fde047;
-  border-left-color: #fde047;
+  background: rgba(251, 191, 36, 0.25);
+  color: #fef08a;
+  border-left-color: #fef08a;
 }
 
 .nav-item.active {
-  background: rgba(251, 191, 36, 0.15);
-  color: #fde047;
-  border-left-color: #fde047;
-  font-weight: 600;
+  background: rgba(251, 191, 36, 0.3);
+  color: #fef08a;
+  border-left-color: #fef08a;
+  font-weight: 700;
 }
 
 /* MAIN CONTENT */
