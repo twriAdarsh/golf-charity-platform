@@ -109,7 +109,7 @@ export default function DashboardPage() {
         {/* SIDEBAR */}
         <aside className={`dashboard-sidebar ${sidebarOpen ? 'open' : ''}`}>
           <div className="sidebar-brand">
-            <h3>Player Menu</h3>
+            <h3 style={{ color: '#667eea', fontSize: '1.2rem', fontWeight: '700', letterSpacing: '1px' }}>Player Menu</h3>
           </div>
           <nav className="sidebar-nav">
             <button 
