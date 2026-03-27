@@ -86,7 +86,22 @@ export default function DashboardPage() {
             </button>
             <h1>🏌️ Golf Charity Dashboard</h1>
           </div>
-          <button onClick={handleLogout} className="btn-logout">Logout</button>
+          <button 
+            onClick={handleLogout} 
+            className="btn-logout"
+            style={{
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              color: 'white',
+              border: 'none',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '0.9rem',
+              fontWeight: '600'
+            }}
+          >
+            Logout
+          </button>
         </div>
       </header>
 
@@ -100,36 +115,42 @@ export default function DashboardPage() {
             <button 
               className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
               onClick={() => { setActiveTab('home'); setSidebarOpen(false); }}
+              style={{ color: '#ffffff', fontWeight: 'bold' }}
             >
               🏠 Home
             </button>
             <button 
               className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
               onClick={() => { setActiveTab('profile'); setSidebarOpen(false); }}
+              style={{ color: '#ffffff', fontWeight: 'bold' }}
             >
               👤 Profile
             </button>
             <button 
               className={`nav-item ${activeTab === 'subscription' ? 'active' : ''}`}
               onClick={() => { setActiveTab('subscription'); setSidebarOpen(false); }}
+              style={{ color: '#ffffff', fontWeight: 'bold' }}
             >
               💳 Subscription
             </button>
             <button 
               className={`nav-item ${activeTab === 'charities' ? 'active' : ''}`}
               onClick={() => { setActiveTab('charities'); setSidebarOpen(false); }}
+              style={{ color: '#ffffff', fontWeight: 'bold' }}
             >
               🏛️ View Charities
             </button>
             <button 
               className={`nav-item ${activeTab === 'draws' ? 'active' : ''}`}
               onClick={() => { setActiveTab('draws'); setSidebarOpen(false); }}
+              style={{ color: '#ffffff', fontWeight: 'bold' }}
             >
               🎯 Monthly Draws
             </button>
             <button 
               className={`nav-item ${activeTab === 'scores' ? 'active' : ''}`}
               onClick={() => { setActiveTab('scores'); setSidebarOpen(false); }}
+              style={{ color: '#ffffff', fontWeight: 'bold' }}
             >
               📊 Recent Scores
             </button>
