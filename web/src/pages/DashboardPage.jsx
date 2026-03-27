@@ -115,42 +115,42 @@ export default function DashboardPage() {
             <button 
               className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
               onClick={() => { setActiveTab('home'); setSidebarOpen(false); }}
-              style={{ color: '#ffffff', fontWeight: 'bold' }}
+              style={{ color: '#667eea', fontWeight: 'bold' }}
             >
               🏠 Home
             </button>
             <button 
               className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
               onClick={() => { setActiveTab('profile'); setSidebarOpen(false); }}
-              style={{ color: '#ffffff', fontWeight: 'bold' }}
+              style={{ color: '#667eea', fontWeight: 'bold' }}
             >
               👤 Profile
             </button>
             <button 
               className={`nav-item ${activeTab === 'subscription' ? 'active' : ''}`}
               onClick={() => { setActiveTab('subscription'); setSidebarOpen(false); }}
-              style={{ color: '#ffffff', fontWeight: 'bold' }}
+              style={{ color: '#667eea', fontWeight: 'bold' }}
             >
               💳 Subscription
             </button>
             <button 
               className={`nav-item ${activeTab === 'charities' ? 'active' : ''}`}
               onClick={() => { setActiveTab('charities'); setSidebarOpen(false); }}
-              style={{ color: '#ffffff', fontWeight: 'bold' }}
+              style={{ color: '#667eea', fontWeight: 'bold' }}
             >
               🏛️ View Charities
             </button>
             <button 
               className={`nav-item ${activeTab === 'draws' ? 'active' : ''}`}
               onClick={() => { setActiveTab('draws'); setSidebarOpen(false); }}
-              style={{ color: '#ffffff', fontWeight: 'bold' }}
+              style={{ color: '#667eea', fontWeight: 'bold' }}
             >
               🎯 Monthly Draws
             </button>
             <button 
               className={`nav-item ${activeTab === 'scores' ? 'active' : ''}`}
               onClick={() => { setActiveTab('scores'); setSidebarOpen(false); }}
-              style={{ color: '#ffffff', fontWeight: 'bold' }}
+              style={{ color: '#667eea', fontWeight: 'bold' }}
             >
               📊 Recent Scores
             </button>
