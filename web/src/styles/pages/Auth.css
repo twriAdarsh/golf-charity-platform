@@ -37,11 +37,12 @@
 }
 
 .auth-link a {
-  color: #2563eb;
+  color: #667eea;
   text-decoration: none;
   font-weight: 600;
 }
 
 .auth-link a:hover {
   text-decoration: underline;
+  color: #764ba2;
 }
